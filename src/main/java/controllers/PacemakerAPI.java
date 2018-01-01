@@ -37,8 +37,11 @@ interface PacemakerInterface {
 	Call<Activity> addActivity(@Path("id") String id, @Body Activity activity);
 	
 	@POST("/users/{email}")
-	Call<User> followFriend(@Path("email") String email);
+	Call<User> followFriend(@Path("id") String id, @Path("email") String email);
 
+	@POST("/users/{email}")
+	Call<User> deleteFriend(@Path("id") String id, @Path("email") String email);
+	
 	@GET("/users/{id}/activities/{activityId}")
 	Call<Activity> getActivity(@Path("id") String id, @Path("activityId") String activityId);
 
@@ -219,12 +222,27 @@ public class PacemakerAPI {
 		}
 	}
 	
-	public void followFriend(String email) {
+	public User followFriend(String id, String email) {
+		User user = null;
 		try {
-			Call<User> call = pacemakerInterface.followFriend(email);
-			call.execute();
+			Call<User> call = pacemakerInterface.followFriend(id, email);
+			Response<User> response = call.execute();
+			user = response.body();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		return user;
+	}
+	
+	public User deleteFriend(String id, String email) {
+		User user = null;
+		try {
+			Call<User> call = pacemakerInterface.deleteFriend(id, email);
+			Response<User> response = call.execute();
+			user = response.body();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return user;
 	}
 }

@@ -94,7 +94,7 @@ public class PacemakerConsoleService {
 
 		Optional<Activity> activity = Optional.fromNullable(paceApi.getActivity(loggedInUser.getId(), id));
 		if (activity.isPresent()) {
-			// console.renderLocations(activity.get().route);
+			console.renderLocations(activity.get().route);
 		}
 	}
 
@@ -128,6 +128,10 @@ public class PacemakerConsoleService {
 
 	@Command(description = "Follow Friend: Follow a specific friend")
 	public void follow(@Param(name = "email") String email) {
+		Optional<User> user = Optional.fromNullable(loggedInUser);
+		if (user.isPresent()) {
+			console.renderUser(paceApi.followFriend(user.get().id, email));
+		}
 	}
 
 	@Command(description = "List Friends: List all of the friends of the logged in user")
@@ -141,7 +145,11 @@ public class PacemakerConsoleService {
 	// Good Commands
 
 	@Command(description = "Unfollow Friends: Stop following a friend")
-	public void unfollowFriend() {
+	public void unfollowFriend(@Param(name = "email") String email) {
+		Optional<User> user = Optional.fromNullable(loggedInUser);
+		if (user.isPresent()) {
+			console.renderUser(paceApi.deleteFriend(user.get().id, email));
+		}
 	}
 
 	@Command(description = "Message Friend: send a message to a friend")
