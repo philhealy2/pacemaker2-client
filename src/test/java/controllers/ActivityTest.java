@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.After;
@@ -16,7 +17,8 @@ import models.User;
 
 public class ActivityTest {
 
-	PacemakerAPI pacemaker = new PacemakerAPI("https://morning-dusk-13146.herokuapp.com/");
+	//PacemakerAPI pacemaker = new PacemakerAPI("https://morning-dusk-13146.herokuapp.com/");
+	PacemakerAPI pacemaker = new PacemakerAPI("http://localhost:7000");
 	User homer = new User("homer", "simpson", "homer@simpson.com", "secret");
 
 	@Before

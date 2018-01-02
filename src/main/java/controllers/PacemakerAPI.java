@@ -31,7 +31,7 @@ interface PacemakerInterface {
 	Call<List<Activity>> getActivities(@Path("id") String id);
 
 	@GET("/users/{id}/activities")
-	Call<List<Activity>> listActivities(@Path("userId") String id, @Path("sortBy") String sortBy);
+	Call<List<Activity>> listActivities(@Path("id") String id, @Path("sortBy") String sortBy);
 
 	@POST("/users/{id}/activities")
 	Call<Activity> addActivity(@Path("id") String id, @Body Activity activity);
@@ -70,7 +70,7 @@ public class PacemakerAPI {
 	PacemakerInterface pacemakerInterface;
 
 	public PacemakerAPI(String url) {
-		Gson gson = new GsonBuilder().create();
+		Gson gson = new GsonBuilder().setLenient().create();
 		Retrofit retrofit = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create(gson))
 				.build();
 		pacemakerInterface = retrofit.create(PacemakerInterface.class);
@@ -108,7 +108,7 @@ public class PacemakerAPI {
 			returnedActivity = response.body();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		}
+			}
 		return returnedActivity;
 	}
 
