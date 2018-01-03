@@ -5,11 +5,15 @@ import com.google.common.base.Optional;
 import asg.cliche.Command;
 import asg.cliche.Param;
 
+import static models.Fixtures.users;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import models.Activity;
 import models.User;
@@ -18,10 +22,13 @@ import parsers.Parser;
 
 public class PacemakerConsoleService {
 
-//	PacemakerAPI paceApi = new PacemakerAPI("https://fierce-brook-34.herokuapp.com/");
+	// PacemakerAPI paceApi = new
+	// PacemakerAPI("https://fierce-brook-34.herokuapp.com/");
 	PacemakerAPI paceApi = new PacemakerAPI("http://localhost:7000");
 	private Parser console = new AsciiTableParser();
 	private User loggedInUser = null;
+
+	private static double distance = 0;
 
 	public PacemakerConsoleService() {
 	}
@@ -76,7 +83,7 @@ public class PacemakerConsoleService {
 			console.renderActivities(paceApi.getActivities(user.get().id));
 		}
 	}
-	
+
 	// Baseline Commands
 
 	@Command(description = "Add location: Append location to an activity")
@@ -108,7 +115,7 @@ public class PacemakerConsoleService {
 			Collection<Activity> usersActivities = paceApi.getActivities(user.get().id);
 			usersActivities.forEach(a -> reportActivities.add(a));
 			reportActivities.sort((a1, a2) -> a1.type.compareTo(a2.type));
-						
+
 			console.renderActivities(reportActivities);
 		}
 	}
@@ -158,7 +165,7 @@ public class PacemakerConsoleService {
 			Collection<Activity> usersActivities = paceApi.getActivities(user.get().id);
 			usersActivities.forEach(a -> reportActivities.add(a));
 			reportActivities.sort((a1, a2) -> a1.type.compareTo(a2.type));
-						
+
 			console.renderActivities(reportActivities);
 		}
 	}
@@ -191,6 +198,31 @@ public class PacemakerConsoleService {
 
 	@Command(description = "Distance Leader Board: list summary distances of all friends, sorted longest to shortest")
 	public void distanceLeaderBoard() {
+		Optional<User> user = Optional.fromNullable(loggedInUser);
+		List<User> summaryFriends = new ArrayList<>();
+
+		if (user.isPresent()) {
+			List<User> friends = paceApi.listFriends(user.get().id);
+
+			// Example of Lamda implementation
+			for (User friend : friends) {
+
+				Collection<Activity> activities = friend.activities.values();
+
+				activities.forEach(activity -> {
+
+					distance = distance + activity.distance;
+				});
+				friend.summaryDistance = distance;
+				summaryFriends.add(friend);
+
+				distance = 0;
+			}
+
+			// Example of streams implementation
+			summaryFriends.stream().sorted((p1, p2) -> Double.compare(p1.summaryDistance, p2.summaryDistance));
+		}
+		console.renderUsers(summaryFriends);
 	}
 
 	// Excellent Commands

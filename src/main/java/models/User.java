@@ -19,6 +19,7 @@ public class User implements Serializable {
   public String lastname;
   public String email;
   public String password;
+  public double summaryDistance;
 
   public Map<String, Activity> activities = new HashMap<>();
 
@@ -41,7 +42,15 @@ public class User implements Serializable {
     return email;
   }
 
-  public User(String firstName, String lastName, String email, String password) {
+  public double getSummaryDistance() {
+	return summaryDistance;
+}
+
+public void setSummaryDistance(double summaryDistance) {
+	this.summaryDistance = summaryDistance;
+}
+
+public User(String firstName, String lastName, String email, String password) {
     this.id = UUID.randomUUID().toString();
     this.firstname = firstName;
     this.lastname = lastName;
