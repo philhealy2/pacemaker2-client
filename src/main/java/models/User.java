@@ -21,7 +21,6 @@ public class User implements Serializable {
   public String password;
 
   public Map<String, Activity> activities = new HashMap<>();
- 
 
   public User() {
   }

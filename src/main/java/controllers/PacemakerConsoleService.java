@@ -18,7 +18,8 @@ import parsers.Parser;
 
 public class PacemakerConsoleService {
 
-	PacemakerAPI paceApi = new PacemakerAPI("https://fierce-brook-34.herokuapp.com/");
+//	PacemakerAPI paceApi = new PacemakerAPI("https://fierce-brook-34.herokuapp.com/");
+	PacemakerAPI paceApi = new PacemakerAPI("http://localhost:7000");
 	private Parser console = new AsciiTableParser();
 	private User loggedInUser = null;
 
@@ -75,6 +76,7 @@ public class PacemakerConsoleService {
 			console.renderActivities(paceApi.getActivities(user.get().id));
 		}
 	}
+	
 	// Baseline Commands
 
 	@Command(description = "Add location: Append location to an activity")
@@ -94,7 +96,7 @@ public class PacemakerConsoleService {
 
 		Optional<Activity> activity = Optional.fromNullable(paceApi.getActivity(loggedInUser.getId(), id));
 		if (activity.isPresent()) {
-//			console.renderLocations(activity.get().route);
+			console.renderLocations(paceApi.getLocations(id, activity.get().id));
 		}
 	}
 
@@ -102,7 +104,12 @@ public class PacemakerConsoleService {
 	public void activityReport() {
 		Optional<User> user = Optional.fromNullable(loggedInUser);
 		if (user.isPresent()) {
-			console.renderActivities(paceApi.listActivities(user.get().id, "type"));
+			List<Activity> reportActivities = new ArrayList<>();
+			Collection<Activity> usersActivities = paceApi.getActivities(user.get().id);
+			usersActivities.forEach(a -> reportActivities.add(a));
+			reportActivities.sort((a1, a2) -> a1.type.compareTo(a2.type));
+						
+			console.renderActivities(reportActivities);
 		}
 	}
 
@@ -111,7 +118,7 @@ public class PacemakerConsoleService {
 		Optional<User> user = Optional.fromNullable(loggedInUser);
 		if (user.isPresent()) {
 			List<Activity> reportActivities = new ArrayList<>();
-			Collection<Activity> usersActivities = paceApi.getActivities(user.get().id);
+			Collection<Activity> usersActivities = paceApi.listActivities(user.get().id, type);
 			usersActivities.forEach(a -> {
 				if (a.type.equals(type))
 					reportActivities.add(a);
@@ -136,10 +143,24 @@ public class PacemakerConsoleService {
 
 	@Command(description = "List Friends: List all of the friends of the logged in user")
 	public void listFriends() {
+		Optional<User> user = Optional.fromNullable(loggedInUser);
+		if (user.isPresent()) {
+			console.renderUsers(paceApi.listFriends(user.get().id));
+		}
 	}
 
 	@Command(description = "Friend Activity Report: List all activities of specific friend, sorted alphabetically by type)")
 	public void friendActivityReport(@Param(name = "email") String email) {
+		Optional<User> user = Optional.fromNullable(loggedInUser);
+		User friend = paceApi.getUserByEmail(email);
+		if (friend != null) {
+			List<Activity> reportActivities = new ArrayList<>();
+			Collection<Activity> usersActivities = paceApi.getActivities(user.get().id);
+			usersActivities.forEach(a -> reportActivities.add(a));
+			reportActivities.sort((a1, a2) -> a1.type.compareTo(a2.type));
+						
+			console.renderActivities(reportActivities);
+		}
 	}
 
 	// Good Commands
@@ -154,10 +175,18 @@ public class PacemakerConsoleService {
 
 	@Command(description = "Message Friend: send a message to a friend")
 	public void messageFriend(@Param(name = "email") String email, @Param(name = "message") String message) {
+		Optional<User> user = Optional.fromNullable(loggedInUser);
+		if (user.isPresent()) {
+			console.println(paceApi.messageFriend(email, message).toString());
+		}
 	}
 
 	@Command(description = "List Messages: List all messages for the logged in user")
 	public void listMessages() {
+		Optional<User> user = Optional.fromNullable(loggedInUser);
+		if (user.isPresent()) {
+			console.println(paceApi.listMessages(user.get().id).toString());
+		}
 	}
 
 	@Command(description = "Distance Leader Board: list summary distances of all friends, sorted longest to shortest")

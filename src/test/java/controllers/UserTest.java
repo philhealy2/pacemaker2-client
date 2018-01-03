@@ -28,8 +28,18 @@ public class UserTest {
     assertEquals(user, homer);
     User user2 = pacemaker.getUserByEmail(homer.email);
     assertEquals(user2, homer);
+    User user3 = pacemaker.getUser(user.id);
+    assertEquals(user3, homer);
   }
-
+  
+  @Test
+  public void testDeleteUser() {
+    User user = pacemaker.createUser(homer.firstname, homer.lastname, homer.email, homer.password);
+    assertEquals(user, homer);
+    User user2 = pacemaker.deleteUser(user.id);
+    assertEquals(user2, homer);
+  }
+  
   @Test
   public void testCreateUsers() {
     users.forEach(

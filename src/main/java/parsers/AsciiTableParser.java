@@ -22,7 +22,7 @@ public class AsciiTableParser extends Parser {
       System.out.println("not found");
     }
   }
-
+  
   public void renderUsers(Collection<User> users) {
     if (users != null) {
       if (!users.isEmpty()) {

@@ -51,6 +51,17 @@ public class ActivityTest {
 		Activity returnedActivity2 = pacemaker.getActivity(homer.id, returnedActivity1.id);
 		assertEquals(returnedActivity1, returnedActivity2);
 	}
+	
+	@Test
+	public void testGetActivityReportByType() {
+		Activity activity = new Activity("run", "fridge", 0.5);
+		Activity returnedActivity1 = pacemaker.createActivity(homer.id, activity.type, activity.location,
+				activity.distance);
+		assertNotNull(returnedActivity1);
+		List<Activity> returnedActivityList = (List<Activity>) pacemaker.listActivities(homer.id,"type");
+		assertNotNull(returnedActivityList);
+	}
+	
 
 	@Test
 	public void testDeleteActivity() {
