@@ -29,7 +29,7 @@ public class AsciiTableParser extends Parser {
         List<User> userList = new ArrayList<User>(users);
         IASCIITableAware asciiTableAware = new CollectionASCIITableAware<User>(userList, "id",
             "firstname",
-            "lastname", "email");
+            "lastname", "email", "summarydistance");
         System.out.println(ASCIITable.getInstance().getTable(asciiTableAware));
       }
       System.out.println("ok");

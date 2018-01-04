@@ -45,6 +45,12 @@ public class PacemakerConsoleService {
 	public void listUsers() {
 		console.renderUsers(paceApi.getUsers());
 	}
+	
+	@Command(description = "Delete Users: Delete all users")
+	public void deleteUsers() {
+		paceApi.deleteUsers();
+		console.println("users deleted");
+	}
 
 	@Command(description = "Login: Log in a registered user in to pacemaker")
 	public void login(@Param(name = "email") String email, @Param(name = "password") String password) {
@@ -213,14 +219,14 @@ public class PacemakerConsoleService {
 
 					distance = distance + activity.distance;
 				});
-				friend.summaryDistance = distance;
+				friend.summarydistance = distance;
 				summaryFriends.add(friend);
 
 				distance = 0;
 			}
 
 			// Example of streams implementation
-			summaryFriends.stream().sorted((p1, p2) -> Double.compare(p1.summaryDistance, p2.summaryDistance));
+			summaryFriends.stream().sorted((p1, p2) -> Double.compare(p1.summarydistance, p2.summarydistance));
 		}
 		console.renderUsers(summaryFriends);
 	}

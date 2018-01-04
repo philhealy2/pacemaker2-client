@@ -19,7 +19,7 @@ public class User implements Serializable {
   public String lastname;
   public String email;
   public String password;
-  public double summaryDistance;
+  public double summarydistance;
 
   public Map<String, Activity> activities = new HashMap<>();
 
@@ -42,12 +42,12 @@ public class User implements Serializable {
     return email;
   }
 
-  public double getSummaryDistance() {
-	return summaryDistance;
+  public double getSummarydistance() {
+	return summarydistance;
 }
 
-public void setSummaryDistance(double summaryDistance) {
-	this.summaryDistance = summaryDistance;
+public void setSummarydistance(double summarydistance) {
+	this.summarydistance = summarydistance;
 }
 
 public User(String firstName, String lastName, String email, String password) {
@@ -79,6 +79,7 @@ public User(String firstName, String lastName, String email, String password) {
         .addValue(lastname)
         .addValue(password)
         .addValue(email)
+        .addValue(summarydistance)
         .addValue(activities)
         .toString();
   }

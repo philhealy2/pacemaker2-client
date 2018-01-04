@@ -55,6 +55,50 @@ public class ActivityTest {
 		Activity returnedActivity2 = pacemaker.getActivity(homer.id, returnedActivity1.id);
 		assertNotEquals(returnedActivity1, returnedActivity2);
 	}
+	
+	@Test
+	public void testGetActivities() {
+		Activity activity = new Activity("run", "fridge", 0.5);
+		Activity returnedActivity1 = pacemaker.createActivity(homer.id, activity.type, activity.location,
+				activity.distance);
+		assertNotNull(returnedActivity1);
+
+		Collection<Activity> returnedActivity2 = pacemaker.getActivities(homer.id);
+		assertNotNull(returnedActivity2);
+	}
+	
+	@Test
+	public void testListActivities() {
+		Activity activity = new Activity("run", "fridge", 0.5);
+		Activity returnedActivity1 = pacemaker.createActivity(homer.id, activity.type, activity.location,
+				activity.distance);
+		assertNotNull(returnedActivity1);
+
+		Collection<Activity> returnedActivity2 = pacemaker.listActivities(homer.id, "run");
+		assertNotNull(returnedActivity2);
+	}
+	
+	@Test
+	public void testListActivitiesFail() {
+		Activity activity = new Activity("run", "fridge", 0.5);
+		Activity returnedActivity1 = pacemaker.createActivity(homer.id, activity.type, activity.location,
+				activity.distance);
+		assertNotNull(returnedActivity1);
+
+		Collection<Activity> returnedActivity2 = pacemaker.listActivities(null, "run");
+		assertNull(returnedActivity2);
+	}
+	
+	@Test
+	public void testGetActivitiesFail() {
+		Activity activity = new Activity("run", "fridge", 0.5);
+		Activity returnedActivity1 = pacemaker.createActivity(homer.id, activity.type, activity.location,
+				activity.distance);
+		assertNotNull(returnedActivity1);
+
+		Collection<Activity> returnedActivity2 = pacemaker.getActivities(null);
+		assertNull(returnedActivity2);
+	}
 
 	@Test
 	public void testGetActivityFail() {
@@ -124,5 +168,19 @@ public class ActivityTest {
 		List<Location> returnedLocations = pacemaker.getLocations(homer.id, returnedActivity.id);
 		assertEquals(Fixtures.locations.size(), returnedLocations.size());
 		assertEquals(Fixtures.locations, returnedLocations);
+	}
+	
+	@Test
+	public void getLocationFail() {
+		pacemaker.deleteActivities(homer.id);
+		Activity activity = new Activity("walk", "shop", 2.5);
+		Location location = new Location(12.0, 33.0);
+
+		Activity returnedActivity = pacemaker.createActivity(homer.id, activity.type, activity.location,
+				activity.distance);
+		pacemaker.addLocation(homer.id, returnedActivity.id, location.latitude, location.longitude);
+
+		List<Location> locations = pacemaker.getLocations(null, returnedActivity.id);
+		assertNull(locations);
 	}
 }

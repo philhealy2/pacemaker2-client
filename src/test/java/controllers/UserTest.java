@@ -32,6 +32,7 @@ public class UserTest {
     assertEquals(user3, homer);
   }
   
+  
   @Test
   public void testDeleteUser() {
     User user = pacemaker.createUser(homer.firstname, homer.lastname, homer.email, homer.password);
