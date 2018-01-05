@@ -92,7 +92,7 @@ public class PacemakerAPI {
 			Response<List<User>> response = call.execute();
 			users = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+//			//			System.out.println(e.getMessage());
 		}
 		return users;
 	}
@@ -104,7 +104,7 @@ public class PacemakerAPI {
 			Response<User> response = call.execute();
 			returnedUser = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+//			//			System.out.println(e.getMessage());
 		}
 		return returnedUser;
 	}
@@ -116,7 +116,7 @@ public class PacemakerAPI {
 			Response<Activity> response = call.execute();
 			returnedActivity = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+//			//			System.out.println(e.getMessage());
 		}
 		return returnedActivity;
 	}
@@ -128,7 +128,7 @@ public class PacemakerAPI {
 			Response<Activity> response = call.execute();
 			activity = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 		return activity;
 	}
@@ -140,7 +140,7 @@ public class PacemakerAPI {
 			Response<List<Activity>> response = call.execute();
 			activities = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 		return activities;
 	}
@@ -152,7 +152,7 @@ public class PacemakerAPI {
 			Response<List<Activity>> response = call.execute();
 			activities = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 		return activities;
 	}
@@ -162,7 +162,7 @@ public class PacemakerAPI {
 			Call<Location> call = pacemakerInterface.addLocation(id, activityId, new Location(latitude, longitude));
 			call.execute();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 	}
 
@@ -173,7 +173,7 @@ public class PacemakerAPI {
 			Response<List<Location>> response = call.execute();
 			locations = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 		return locations;
 	}
@@ -196,7 +196,7 @@ public class PacemakerAPI {
 			Response<User> response = call.execute();
 			user = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 		return user;
 	}
@@ -206,7 +206,7 @@ public class PacemakerAPI {
 			Call<User> call = pacemakerInterface.deleteUsers();
 			call.execute();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 	}
 
@@ -217,7 +217,7 @@ public class PacemakerAPI {
 			Response<User> response = call.execute();
 			user = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 		return user;
 	}
@@ -227,7 +227,7 @@ public class PacemakerAPI {
 			Call<String> call = pacemakerInterface.deleteActivities(id);
 			call.execute();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 	}
 
@@ -238,7 +238,7 @@ public class PacemakerAPI {
 			Response<List<String>> response = call.execute();
 			msgs = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 		return msgs;
 	}
@@ -250,7 +250,7 @@ public class PacemakerAPI {
 			Response<User> response = call.execute();
 			user = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 		return user;
 	}
@@ -262,7 +262,7 @@ public class PacemakerAPI {
 			Response<List<User>> response = call.execute();
 			user = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 		return user;
 	}
@@ -274,7 +274,7 @@ public class PacemakerAPI {
 			Response<List<String>> response = call.execute();
 			msgs = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 		return msgs;
 	}
@@ -286,7 +286,7 @@ public class PacemakerAPI {
 			Response<User> response = call.execute();
 			user = response.body();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//			System.out.println(e.getMessage());
 		}
 		return user;
 	}

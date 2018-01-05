@@ -1,20 +1,13 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import com.google.common.base.Optional;
 
 import asg.cliche.Command;
 import asg.cliche.Param;
-
-import static models.Fixtures.users;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import models.Activity;
 import models.User;
 import parsers.AsciiTableParser;

@@ -7,7 +7,6 @@ import org.junit.Test;
 public class PacemakerConsoleServiceTest {
 	
 	PacemakerConsoleService service = new PacemakerConsoleService();
-	PacemakerAPI pacemaker = new PacemakerAPI("http://localhost:7000");
 
 	@Before
 	public void setup() {
