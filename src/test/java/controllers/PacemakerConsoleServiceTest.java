@@ -19,7 +19,7 @@ public class PacemakerConsoleServiceTest {
 	}
 
 	@Test
-	public void testRegister() {
+	public void testConsole() {
 		
 		//Register, Login and test first user
 		service.register("Test", "Test", "test@test.com", "password");
@@ -48,5 +48,15 @@ public class PacemakerConsoleServiceTest {
 		service.distanceLeaderBoard();
 		service.listMessages();
 	}
+	
+	 @Test
+	  public void testRegisterAndLoginKotlin() {
+	    
+	    //Register, Login and test first user
+	    service.register("Test", "Test", "test@test.com", "password");
+	    service.register("Test2", "Test2", "test2@test.com", "password"); 
+	    service.login("test@test.com", "password");
+	    service.listUsers();
+	 }
 
 }

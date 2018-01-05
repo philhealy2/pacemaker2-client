@@ -15,8 +15,7 @@ import parsers.Parser;
 
 public class PacemakerConsoleService {
 
-	// PacemakerAPI paceApi = new
-	// PacemakerAPI("https://fierce-brook-34.herokuapp.com/");
+//  PacemakerAPI paceApi = new PacemakerAPI("https://morning-dusk-13146.herokuapp.com/");
 	PacemakerAPI paceApi = new PacemakerAPI("http://localhost:7000");
 	private Parser console = new AsciiTableParser();
 	private User loggedInUser = null;

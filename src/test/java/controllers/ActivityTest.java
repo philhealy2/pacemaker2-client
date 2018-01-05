@@ -19,8 +19,10 @@ import models.User;
 public class ActivityTest
 {
 
-  PacemakerAPI pacemaker = new PacemakerAPI("https://morning-dusk-13146.herokuapp.com/");
-  // PacemakerAPI pacemaker = new PacemakerAPI("http://localhost:7000");
+  //Test against rest cloud service deployed on cloud
+//  PacemakerAPI pacemaker = new PacemakerAPI("https://morning-dusk-13146.herokuapp.com/");
+  
+   PacemakerAPI pacemaker = new PacemakerAPI("http://localhost:7000");
   User homer = new User("homer", "simpson", "homer@simpson.com", "secret");
 
   @Before
